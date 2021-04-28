@@ -8,13 +8,19 @@
 </head>
 <body>
     <div class="content">
+        {% if user.is_authenticated %}
+            <p>{{ user.username }}</p>
+            <a href="{% url 'authapp:logout' %}">Logout</a>
+            <hr>
+        {% else %}
+            <a href="{% url 'authapp:login' %}">Login</a>
+            <a href="{% url 'authapp:registration' %}">Registration</a>
+        {% endif %}
+        
         {% for post in object_list %}
             <p>{{ post.name }}</p>
-            <p>{{ post.text }}</p>
-            <p>{{ post.time }}</p>
-            <p>{{ post.user }}</p>
-            <p>{{ post.is_active }}</p>
-            <p>{{ post.comments_set.all }}</p>
+            <p>{{ post.likes_set.all }}</p>
+            <a href="{% url 'mainapp:post' pk=post.pk %}">Подробнее</a>
             <hr>
         {% endfor %}
     </div>

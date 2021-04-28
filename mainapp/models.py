@@ -17,6 +17,8 @@ class Post(models.Model):
     def __str__(self):
         return self.name
 
+    def count_likes(self):
+        return len(self.likes_set.all())
 
 class Comments(models.Model):
     """
@@ -33,3 +35,19 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.text
+
+class Likes(models.Model):
+    """
+    Stores a likes for posts
+    Related to:
+        :model: `User`
+        :model: `Post`
+    Double unique key:
+        :field: `user`
+        :field: `post`
+    """
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name='Пользователь')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='Пост')
+    
+    class Meta:
+        unique_together = ("user", "post")
