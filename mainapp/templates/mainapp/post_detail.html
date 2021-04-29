@@ -1,44 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post list</title>
-</head>
-<body>
-    <div class="content">
-        {% if user.is_authenticated %}
-            <p>{{ user.username }}</p>
-            <a href="{% url 'authapp:logout' %}">Logout</a>
-            <hr>
-        {% else %}
-            <a href="{% url 'authapp:login' %}">Login</a>
-            <a href="{% url 'authapp:registration' %}">Registration</a>
-        {% endif %}
-        
-        <p>{{ object.name }}</p>
-        <p>{{ object.text }}</p>
-        <p>{{ object.time }}</p>
-        <p>{{ object.user }}</p>
-        <p>{{ object.is_active }}</p>
+{% include "mainapp/includes/inc__menu.html" %}
+{% block content %}
+    <p>{{ object.name }}</p>
+    <p>{{ object.text }}</p>
+    <p>{{ object.time }}</p>
+    <p>{{ object.user }}</p>
+    <p>{{ object.is_active }}</p>
+    <hr>
+    <p>Likes: {{ object.count_likes }}</p>
+    <a href="{% url 'mainapp:like_post' pk=object.pk %}">Лайк</a>
+    {% if user.is_authenticated %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ comment_form.text }}
+            <input type="hidden" name="user" id="id_user" value="{{ user.pk }}">
+            <input type="hidden" name="post" id="id_post" value="{{ object.pk }}">
+            <input type="submit" value="Отправить">
+        </form>
+    {% endif %}
+    {% for comment in object.comments_set.all %}
+        <p>{{ comment.user }}</p>
+        <p>{{ comment }}</p>
         <hr>
-        <p>Likes: {{ object.count_likes }}</p>
-        {% if user.is_authenticated %}
-            <form method="POST">
-                {% csrf_token %}
-                {{ comment_form.text }}
-                <input type="hidden" name="user" id="id_user" value="{{ user.pk }}">
-                <input type="hidden" name="post" id="id_post" value="{{ object.pk }}">
-                <input type="submit" value="Отправить">
-            </form>
-        {% endif %}
-
-        {% for comment in object.comments_set.all %}
-            <p>{{ comment.user }}</p>
-            <p>{{ comment }}</p>
-            <hr>
-        {% endfor %}
-    </div>
-</body>
-</html>
+    {% endfor %}
+{% endblock %}

@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from mainapp.models import Post
+from mainapp.models import Post, Likes
 from mainapp.forms import CommentForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 
 class PostList(ListView):
@@ -55,3 +56,18 @@ class PostDetail(DetailView):
             if form.is_valid():
                 form.save()
         return HttpResponseRedirect(reverse("mainapp:post", kwargs={"pk":pk}))
+
+
+@login_required
+def like(request, pk):
+    """
+    Add functionals of likes
+    """
+    try:
+        like = Likes()
+        like.user = request.user
+        like.post = Post.objects.filter(pk=pk).first()
+        like.save()
+    except Exception:
+        print("Лайк уже есть")
+    return HttpResponseRedirect(reverse("mainapp:post", kwargs={"pk":pk}))
