@@ -1,6 +1,7 @@
 {% extends "mainapp/root.html"%}
+
 {% block content %}
-    
+    {% include "mainapp/includes/inc__menu.html" %}
     {% for post in object_list %}
         <p>{{ post.name }}</p>
         <p>{{ post.likes_set.all }}</p>

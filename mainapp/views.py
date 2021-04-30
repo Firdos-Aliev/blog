@@ -22,9 +22,6 @@ class PostList(ListView):
     model = Post
 
     def get_queryset(self):
-        
-        #print(self.model.objects.all())
-        print(self.model.objects.all()[0].count_likes())
         return self.model.objects.filter(is_active=True)
 
 

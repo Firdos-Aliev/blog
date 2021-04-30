@@ -1,8 +1,10 @@
-from django.views.generic import FormView, RedirectView, CreateView
+from django.views.generic import FormView, RedirectView, CreateView, DetailView, UpdateView
 from django.contrib.auth.views import get_user_model
 from django.http import HttpResponseRedirect
-from authapp.forms import LoginForm, RegistrationForm
+from authapp.forms import LoginForm, RegistrationForm, UserProfileForm
 from django.contrib.auth import login, logout
+from django.contrib.auth.models import User
+
 
 
 class UserLogin(FormView):
@@ -38,3 +40,30 @@ class UserRegistration(CreateView):
     template_name = 'authapp/registration.html'
     success_url = '/'
     #TO DO: перегрузить form_valid и сохранить пользователя вместе с профилем
+
+
+class UsersProfile(DetailView):
+    """
+    Display user profile
+
+    **Context**
+    :model: `User`
+
+    **Template**
+    :template: `authapp/user_profile.html`
+    """
+    model = get_user_model()
+    template_name = 'authapp/user_profile.html'
+
+
+class UserProfile(UpdateView):
+    """
+    Provides users the ability to change profile
+    """
+    form_class = UserProfileForm
+    model = get_user_model()
+    template_name = 'authapp/profile.html'
+    success_url = '/'
+
+    def get_object(self, queryset=None):
+        return self.request.user

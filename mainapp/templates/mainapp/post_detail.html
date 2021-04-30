@@ -1,5 +1,7 @@
-{% include "mainapp/includes/inc__menu.html" %}
+{% extends "mainapp/root.html"%}
+
 {% block content %}
+    {% include "mainapp/includes/inc__menu.html" %}
     <p>{{ object.name }}</p>
     <p>{{ object.text }}</p>
     <p>{{ object.time }}</p>

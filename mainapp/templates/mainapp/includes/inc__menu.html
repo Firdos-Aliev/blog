@@ -1,7 +1,7 @@
 <ul>
     <li><a href="{% url 'mainapp:post_list' %}">Главная</a></li>
     {% if user.is_authenticated %}
-        <li>{{ user.username }}</li>
+        <li><a href="{% url 'authapp:profile' %}">{{ request.user.username }}</a></li>
         <li><a href="{% url 'authapp:logout' %}">Выйти</a></li>
     {% else %}
         <li><a href="{% url 'authapp:login' %}">Войти</a></li>
