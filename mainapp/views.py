@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, FormView, CreateView
 from mainapp.models import Post, Likes
-from mainapp.forms import CommentForm
+from mainapp.forms import CommentForm, PostForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class PostList(ListView):
@@ -53,6 +54,19 @@ class PostDetail(DetailView):
             if form.is_valid():
                 form.save()
         return HttpResponseRedirect(reverse("mainapp:post", kwargs={"pk":pk}))
+
+
+class PostCreate(LoginRequiredMixin, CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'mainapp/post_create.html'
+
+    def post(self, request):
+        if request.method == "POST":
+            form = PostForm(data=request.POST)
+            if form.is_valid():
+                form.save()
+        return HttpResponseRedirect(reverse("authapp:users_profile", kwargs={"pk":request.user.pk}))
 
 
 @login_required
