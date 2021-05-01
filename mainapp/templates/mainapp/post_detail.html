@@ -5,7 +5,8 @@
     <p>{{ object.name }}</p>
     <p>{{ object.text }}</p>
     <p>{{ object.time }}</p>
-    <p>{{ object.user }}</p>
+    
+    <a href="{% url 'authapp:users_profile' pk=object.user.pk %}"><p>{{ object.user }}</p></a>
     <p>{{ object.is_active }}</p>
     <hr>
     <p>Likes: {{ object.count_likes }}</p>
