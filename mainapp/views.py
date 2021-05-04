@@ -10,7 +10,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class PostList(ListView):
     """
-    
     Display all post from model.Post and their cooments
 
     **Context**
@@ -18,7 +17,6 @@ class PostList(ListView):
 
     **Template**
     :template: `mainapp/post_list.html`
-    
     """
     model = Post
 
@@ -28,7 +26,6 @@ class PostList(ListView):
 
 class PostDetail(DetailView):
     """
-    
     Display post and comments where post_pk = pk
 
     **Context**
@@ -36,7 +33,6 @@ class PostDetail(DetailView):
 
     **Template**
     :template: `mainapp/post_detail.html`
-    
     """
     model = Post
 
@@ -57,13 +53,23 @@ class PostDetail(DetailView):
 
 
 class PostCreate(LoginRequiredMixin, CreateView):
+    """
+    Display form to create a post
+
+    **Context**
+    :model: `mainapp.models.Post`
+    :form: `mainapp.forms.PostForm`
+
+    **Template**
+    :template: `mainapp/post_create.html`
+    """
     model = Post
     form_class = PostForm
     template_name = 'mainapp/post_create.html'
 
     def post(self, request):
         if request.method == "POST":
-            form = PostForm(data=request.POST)
+            form = PostForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
         return HttpResponseRedirect(reverse("authapp:users_profile", kwargs={"pk":request.user.pk}))

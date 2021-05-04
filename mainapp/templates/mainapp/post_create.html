@@ -2,9 +2,18 @@
 
 {% block content %}
     {% include "mainapp/includes/inc__menu.html" %}
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        <label for="">Тема:</label>
+        {{ form.name }}
+        <br>
+        <label for="">Картинка:</label>
+        {{ form.img }}
+        <br>
+        <label for="">Текст:</label>
+        {{ form.text }}
+        <br> 
+        <input type="hidden" name="user" id="id_user" value="{{ request.user.pk }}">
         <input type="submit" value="Create">
     </form>
 {% endblock %}

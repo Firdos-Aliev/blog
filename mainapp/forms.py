@@ -16,6 +16,15 @@ class CommentForm(forms.ModelForm):
 
 
 class PostForm(forms.ModelForm):
+    """
+    Form to add post
+
+    **Fields**
+    :field: `name`
+    :field: `text`
+    :field: `img`
+    :field: `user`
+    """
     class Meta:
         model = Post
-        fields = ("name", "text", "user")
+        fields = ("name", "text", "img", "user")

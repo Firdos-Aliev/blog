@@ -10,6 +10,7 @@ class Post(models.Model):
     """
     name = models.CharField(verbose_name='Название', max_length=256)
     text = models.TextField(verbose_name='Текст')
+    img = models.ImageField(verbose_name='Картинка', upload_to="post_img", blank=True)
     time = models.TimeField(verbose_name='Время добавления/обновления', auto_now=True, auto_now_add=False)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name='Пользователь')
     is_active = models.BooleanField(verbose_name='Активный', default=True)

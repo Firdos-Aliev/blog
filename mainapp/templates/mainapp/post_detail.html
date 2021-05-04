@@ -3,6 +3,7 @@
 {% block content %}
     {% include "mainapp/includes/inc__menu.html" %}
     <p>{{ object.name }}</p>
+    <img src="{{ object.img.url }}" width="600px" alt="#">
     <p>{{ object.text }}</p>
     <p>{{ object.time }}</p>
     
@@ -15,7 +16,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ comment_form.text }}
-            <input type="hidden" name="user" id="id_user" value="{{ user.pk }}">
+            <input type="hidden" name="user" id="id_user" value="{{ request.user.pk }}">
             <input type="hidden" name="post" id="id_post" value="{{ object.pk }}">
             <input type="submit" value="Отправить">
         </form>
