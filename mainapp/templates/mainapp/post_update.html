@@ -14,7 +14,9 @@
         <label for="">Текст:</label>
         {{ form.text }}
         <br> 
-        <input type="hidden" name="user" id="id_user" value="{{ request.user.pk }}">
-        <input type="submit" value="Create">
+        <label for="">is_active:</label>
+        {{ form.is_active }}
+        <br> 
+        <input type="submit" value="Update">
     </form>
 {% endblock %}

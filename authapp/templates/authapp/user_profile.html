@@ -1,11 +1,12 @@
 {% extends "mainapp/root.html"%}
+{% load static %}
+
 {% block content %}
     {% include "mainapp/includes/inc__menu.html" %}
     
     <p>{{ object.username }}</p>
     <hr>
     {% for post in object.post_set.all %}
-        
         <a href="{% url 'mainapp:post' pk=post.pk %}"><p>{{ post }}</p></a>
         <hr>
     {% endfor %}

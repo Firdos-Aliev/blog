@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, FormView, CreateView
+from django.views.generic import ListView, DetailView, FormView, CreateView, UpdateView, DeleteView
 from mainapp.models import Post, Likes
-from mainapp.forms import CommentForm, PostForm
+from mainapp.forms import CommentForm, PostForm, PostUpdateForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -75,6 +75,40 @@ class PostCreate(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(reverse("authapp:users_profile", kwargs={"pk":request.user.pk}))
 
 
+class PostUpadate(LoginRequiredMixin, UpdateView):
+    """
+    Display form to update a post
+
+    **Context**
+    :model: `mainapp.models.Post`
+    :form: `mainapp.forms.PostUpdateForm`
+
+    **Template**
+    :template: `mainapp/post_update.html`
+    """
+    form_class = PostUpdateForm
+    model = Post
+    template_name = 'mainapp/post_update.html'
+    success_url = '/'
+
+    def get_object(self, get_queryset=None):
+        post = super(PostDelete, self).get_object()
+        if not post.user == self.request.user:
+            raise Http404
+        return post
+
+
+class PostDelete(LoginRequiredMixin, DeleteView):
+    model = Post
+    success_url = '/'
+
+    def get_object(self, get_queryset=None):
+        post = super(PostDelete, self).get_object()
+        if not post.user == self.request.user:
+            raise Http404
+        return post
+
+
 @login_required
 def like(request, pk):
     """
@@ -86,5 +120,6 @@ def like(request, pk):
         like.post = Post.objects.filter(pk=pk).first()
         like.save()
     except Exception:
-        print("Лайк уже есть")
+        like = Likes.objects.filter(user=request.user.pk, post=pk).first()
+        like.delete()
     return HttpResponseRedirect(reverse("mainapp:post", kwargs={"pk":pk}))

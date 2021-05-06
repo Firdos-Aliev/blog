@@ -1,4 +1,6 @@
 {% extends "mainapp/root.html"%}
+{% load static %}
+
 {% block content %}
     {% include "mainapp/includes/inc__menu.html" %}
     <form method="POST">
@@ -6,4 +8,11 @@
         {{ form.as_p }}
         <input type="submit" value="Change">
     </form>
+    <a href="{% url 'authapp:users_profile' pk=request.user.pk %}">Просмотреть профиль</a>
+    {% for post in request.user.post_set.all %}
+        <hr>
+        <p>{{ post }}</p>
+        <a href="{% url 'mainapp:post_update' pk=post.pk %}">Изменить</a>
+        <a href="{% url 'mainapp:post_delete' pk=post.pk %}">Удалить</a>
+    {% endfor %}
 {% endblock %}

@@ -39,7 +39,6 @@ class UserRegistration(CreateView):
     form_class = RegistrationForm
     template_name = 'authapp/registration.html'
     success_url = '/'
-    #TO DO: перегрузить form_valid и сохранить пользователя вместе с профилем
 
 
 class UsersProfile(DetailView):

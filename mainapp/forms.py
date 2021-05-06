@@ -28,3 +28,17 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ("name", "text", "img", "user")
+
+
+class PostUpdateForm(forms.ModelForm):
+    """
+    Form to add post
+
+    **Fields**
+    :field: `name`
+    :field: `text`
+    :field: `img`
+    """
+    class Meta:
+        model = Post
+        fields = ("name", "text", "img", "is_active")

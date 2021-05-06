@@ -1,9 +1,13 @@
 {% extends "mainapp/root.html"%}
+{% load static %}
 
 {% block content %}
     {% include "mainapp/includes/inc__menu.html" %}
     <p>{{ object.name }}</p>
-    <img src="{{ object.img.url }}" width="600px" alt="#">
+    {% if object.img %}
+        <img src="{{ object.img.url }}" width="600px" alt="#">
+    {% endif %}
+    
     <p>{{ object.text }}</p>
     <p>{{ object.time }}</p>
     
