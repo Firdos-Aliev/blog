@@ -32,7 +32,6 @@ class Comments(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='Пост')
     text = models.TextField(verbose_name='Текст')
     time = models.TimeField(verbose_name='Время добавления/обновления', auto_now=True, auto_now_add=False)
-    is_active = models.BooleanField(verbose_name='Активный', default=True)
 
     def __str__(self):
         return self.text
