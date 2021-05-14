@@ -92,7 +92,7 @@ class PostUpadate(LoginRequiredMixin, UpdateView):
     success_url = '/'
 
     def get_object(self, get_queryset=None):
-        post = super(PostDelete, self).get_object()
+        post = super(PostUpadate, self).get_object()
         if not post.user == self.request.user:
             raise Http404
         return post
