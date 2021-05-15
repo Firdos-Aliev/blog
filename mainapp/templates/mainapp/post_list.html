@@ -3,10 +3,21 @@
 
 {% block content %}
     {% include "mainapp/includes/inc__menu.html" %}
-    {% for post in object_list %}
-        <p>{{ post.name }}</p>
-        <p>{{ post.likes_set.all }}</p>
-        <a href="{% url 'mainapp:post' pk=post.pk %}">Подробнее</a>
-        <hr>
-    {% endfor %}
+
+    {% block css %}
+        <link href="{% static 'styles/auth.css' %}" rel="stylesheet">
+    {% endblock %}
+
+    <div class="auth">
+            {% for post in object_list %}
+            <form class="large">
+                <hr>
+                <h1>{{ post.name }}</h1>
+                <hr>
+                <cntr><p><img src="media/{{post.img}}" width="600px" alt="#пост разружен без фото "></p></cntr>
+                <hr>
+                <h3 class="right"><a href="{% url 'mainapp:post' pk=post.pk %}">Подробнее</a></h3>
+            </form>
+            {% endfor %}
+    </div>
 {% endblock %}

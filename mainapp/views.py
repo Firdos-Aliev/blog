@@ -21,7 +21,7 @@ class PostList(ListView):
     model = Post
 
     def get_queryset(self):
-        return self.model.objects.filter(is_active=True)
+        return self.model.objects.filter(is_active=True).select_related()
 
 
 class PostDetail(DetailView):
@@ -37,7 +37,7 @@ class PostDetail(DetailView):
     model = Post
 
     def get_queryset(self):
-        return self.model.objects.filter(pk=self.kwargs['pk'], is_active=True)
+        return self.model.objects.filter(pk=self.kwargs['pk'], is_active=True).select_related()
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -75,7 +75,7 @@ class PostCreate(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(reverse("authapp:users_profile", kwargs={"pk":request.user.pk}))
 
 
-class PostUpadate(LoginRequiredMixin, UpdateView):
+class PostUpdate(LoginRequiredMixin, UpdateView):
     """
     Display form to update a post
 
@@ -92,7 +92,7 @@ class PostUpadate(LoginRequiredMixin, UpdateView):
     success_url = '/'
 
     def get_object(self, get_queryset=None):
-        post = super(PostUpadate, self).get_object()
+        post = super(PostUpdate, self).get_object()
         if not post.user == self.request.user:
             raise Http404
         return post

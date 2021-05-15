@@ -7,8 +7,9 @@ class CommentForm(forms.ModelForm):
     Form to add comment
 
     **Fields**
-    :field: `username`
-    :field: `password`
+    :field: `user_id`
+    :field: `post_id`
+    :field: `text`
     """
     class Meta:
         model = Comments

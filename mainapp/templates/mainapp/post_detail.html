@@ -3,31 +3,50 @@
 
 {% block content %}
     {% include "mainapp/includes/inc__menu.html" %}
-    <p>{{ object.name }}</p>
-    {% if object.img %}
-        <img src="{{ object.img.url }}" width="600px" alt="#">
-    {% endif %}
-    
-    <p>{{ object.text }}</p>
-    <p>{{ object.time }}</p>
-    
-    <a href="{% url 'authapp:users_profile' pk=object.user.pk %}"><p>{{ object.user }}</p></a>
-    <p>{{ object.is_active }}</p>
-    <hr>
-    <p>Likes: {{ object.count_likes }}</p>
-    <a href="{% url 'mainapp:like_post' pk=object.pk %}">Лайк</a>
-    {% if user.is_authenticated %}
-        <form method="POST">
-            {% csrf_token %}
-            {{ comment_form.text }}
-            <input type="hidden" name="user" id="id_user" value="{{ request.user.pk }}">
-            <input type="hidden" name="post" id="id_post" value="{{ object.pk }}">
-            <input type="submit" value="Отправить">
+
+    {% block css %}
+        <link href="{% static 'styles/auth.css' %}" rel="stylesheet">
+    {% endblock %}
+
+    <div class="auth">
+        <form class="large">
+            <hr>
+            <h1><p>{{ object.name }}</p></h1>
+            <hr>
+                {% if object.img %}
+                    <cntr><img src="{{ object.img.url }}" width="600px" alt="#"></p></cntr>
+                {% endif %}
+            <hr>
+            <h3>{{ object.text }}</h3>
+
+            <sign>
+                <p><p><a class="user" href="{% url 'authapp:users_profile' pk=object.user.pk %}">{{ object.user }}</a><p> at {{ object.time }}</p>
+            </sign>
+            <hr>
+
+
+            <h3 class="right">Likes: {{ object.count_likes }}
+            <p><a href="{% url 'mainapp:like_post' pk=object.pk %}">Лайк</a></p>
+            </h3>
+                {% if user.is_authenticated %}
+                    <cntr><p>Напишите комментарий:</p></cntr>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ comment_form.text }}
+                        <p><input type="hidden" name="user" id="id_user" value="{{ request.user.pk }}"></p>
+                        <p><input type="hidden" name="post" id="id_post" value="{{ object.pk }}"></p>
+                        <p><input type="submit" value="Отправить"></p>
+                    </form>
+                {% endif %}
         </form>
-    {% endif %}
-    {% for comment in object.comments_set.all %}
-        <p>{{ comment.user }}</p>
-        <p>{{ comment }}</p>
-        <hr>
-    {% endfor %}
+
+        <h2><p>Comments:</p></h2>
+        {% for comment in object.comments_set.all %}
+            <form>
+                <h3 class="left"><p>{{ comment.user }}</p></h3>
+                <hr>
+                <p>{{ comment }}</p>
+            </form>
+        {% endfor %}
+    </div>
 {% endblock %}

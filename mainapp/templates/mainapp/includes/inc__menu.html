@@ -1,11 +1,20 @@
-<ul>
-    <li><a href="{% url 'mainapp:post_list' %}">Главная</a></li>
-    {% if request.user.is_authenticated %}
-        <li><a href="{% url 'authapp:profile' %}">{{ request.user.username }}</a></li>
-        <li><a href="{% url 'mainapp:post_create' %}">Создать пост</a></li>
-        <li><a href="{% url 'authapp:logout' %}">Выйти</a></li>
-    {% else %}
-        <li><a href="{% url 'authapp:login' %}">Войти</a></li>
-        <li><a href="{% url 'authapp:registration' %}">Регистрация</a></li>
-    {% endif %}
-</ul>
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'styles/menu.css' %}" rel="stylesheet">
+{% endblock %}
+
+<div class = "menu">
+    <ul>
+        <li><a><img src="{% static 'img/logo.png' %}" width="100" height="35"></a></li>
+        <li><a href="{% url 'mainapp:post_list' %}">Главная</a></li>
+        {% if request.user.is_authenticated %}
+            <li><a href="{% url 'authapp:profile' %}">{{ request.user.username }}</a></li>
+            <li><a href="{% url 'mainapp:post_create' %}">Создать пост</a></li>
+            <li class="right"><a href="{% url 'authapp:logout' %}">Выйти</a></li>
+        {% else %}
+            <li class="right"><a href="{% url 'authapp:registration' %}">Регистрация</a></li>
+            <li class="right"><a href="{% url 'authapp:login' %}">Войти</a></li>
+        {% endif %}
+    </ul>
+</div>

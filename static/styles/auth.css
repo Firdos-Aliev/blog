@@ -1,0 +1,210 @@
+form {
+    /* Size and position */
+    width: 300px;
+    margin: 60px auto 30px;
+    padding: 40px;
+    position: relative;
+    background: lightgray;
+    border-radius: 20px 20px;
+    /* Font styles */
+    font-family: Arial, sans-serif;
+    color: #4f4f4f;
+}
+
+form.big {
+    /* Size and position */
+    width: 400px;
+    margin: 60px auto 30px;
+    padding: 40px;
+    position: relative;
+    background: lightgray;
+    border-radius: 20px 20px;
+    /* Font styles */
+    font-family: Arial, sans-serif;
+    color: #4f4f4f;
+}
+
+form.large{
+    width: 700px;
+    margin: 60px auto 30px;
+    padding: 40px;
+    position: relative;
+    background: lightgray;
+    border-radius: 20px 20px;
+    /* Font styles */
+    font-family: Arial, sans-serif;
+    color: #4f4f4f;
+}
+
+form.sidebar { /* Левая колонка */
+    float: left; /* Обтекание справа */
+    width: 20%; /* Ширина колонки */
+    padding: 5px; /* Поля вокруг текста */
+    margin: 10px 10px 20px 400px; /* Значения отступов */
+}
+
+form.content { /* Правая колонка */
+    width: 300px;
+    margin: 10px 10px 20px 750px;
+    padding: 40px;
+    background: lightgray;
+    border-radius: 20px 20px;
+    /* Font styles */
+    font-family: Arial, sans-serif;
+    color: #4f4f4f;
+}
+
+textarea {
+  /* Выравним многострочные текстовые поля с их текстами-подсказками */
+    vertical-align: top;
+    align: center;
+    margin: 10px 10px;
+  /* Предоставим пространство для ввода текста */
+}
+
+label {
+    font-size: 18px;
+    padding-bottom: 20px;
+    text-align: center;
+    color: #545454;
+}
+
+h1 {
+    font-size: 22px;
+    text-align: center;
+    color: #545454;
+    font-family: Lucida Sans Unicode, sans-serif;
+}
+
+h1.top{
+     font-size: 22px;
+     padding-bottom: 20px;
+     text-align: center;
+}
+
+h2{
+    font-size: 18px;
+    padding-bottom: 20px;
+    text-align: center;
+    color: #545454;
+    font-family: Lucida Sans Unicode, sans-serif;
+}
+
+h2.down{
+    font-size: 18px;
+    text-align: center;
+    font-family: Lucida Sans Unicode, sans-serif;
+}
+
+h3{
+    font-size: 16px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-family: Helvetica, sans-serif;
+}
+
+h3.right{
+    text-align: right;
+}
+
+h3.left{
+    padding-bottom: 2px;
+    text-align: left;
+}
+
+sign{
+     font-size: 18px;
+     padding-bottom: 20px;
+     text-align: right;
+     font-family: Palatino, URW Palladio L, serif;
+     font-style: italic;
+     color: black;
+}
+
+cntr {
+    text-align: center;
+    position: center;
+    margin: 50px;
+}
+
+cntr.margin{
+    width:100px;
+    height:4px;
+}
+
+input {
+    /* Size and position */
+    width: 100%;
+    padding: 8px 4px 8px 10px;
+    margin-bottom: 15px;
+
+    /* Styles */
+    border: 1px solid #4e3043; /* Fallback */
+    border: 1px solid rgba(78,48,67, 0.8);
+    background: rgba(0,0,0,0.15);
+    border-radius: 2px;
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.2),
+        inset 0 1px 1px rgba(0,0,0,0.1);
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: #fff;
+    font-size: 13px;
+}
+
+input:hover{
+    border-color: #333;
+}
+
+input:focus{
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.2),
+        inset 0 1px 1px rgba(0,0,0,0.1),
+        0 0 0 3px rgba(255,255,255,0.15);
+    outline: none;
+}
+
+/* Fallback */
+.no-boxshadow .auth input:focus {
+    outline: 1px solid white;
+}
+
+.auth input[type=submit] {
+    /* Size and position */
+    width: 100%;
+    padding: 8px 5px;
+
+    /* Styles */
+    background: linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    border-radius: 5px;
+    border: 1px solid #4e3043;
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.4),
+        0 2px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    color: white;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
+.auth input[type=submit]:hover {
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.2),
+        inset 0 20px 30px rgba(99,64,86,0.5);
+}
+
+/* Fallback */
+.no-boxshadow .auth input[type=submit]:hover {
+    background: #594642;
+}
