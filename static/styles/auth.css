@@ -11,7 +11,7 @@ form {
     color: #4f4f4f;
 }
 
-form.big {
+.big {
     /* Size and position */
     width: 400px;
     margin: 60px auto 30px;
@@ -24,7 +24,7 @@ form.big {
     color: #4f4f4f;
 }
 
-form.large{
+.large{
     width: 700px;
     margin: 60px auto 30px;
     padding: 40px;
@@ -36,23 +36,13 @@ form.large{
     color: #4f4f4f;
 }
 
-form.sidebar { /* Левая колонка */
+.sidebar { /* Левая колонка */
     float: left; /* Обтекание справа */
     width: 20%; /* Ширина колонки */
     padding: 5px; /* Поля вокруг текста */
     margin: 10px 10px 20px 400px; /* Значения отступов */
 }
 
-form.content { /* Правая колонка */
-    width: 300px;
-    margin: 10px 10px 20px 750px;
-    padding: 40px;
-    background: lightgray;
-    border-radius: 20px 20px;
-    /* Font styles */
-    font-family: Arial, sans-serif;
-    color: #4f4f4f;
-}
 
 textarea {
   /* Выравним многострочные текстовые поля с их текстами-подсказками */
@@ -208,3 +198,4 @@ input:focus{
 .no-boxshadow .auth input[type=submit]:hover {
     background: #594642;
 }
+

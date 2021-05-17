@@ -4,19 +4,16 @@
 {% block content %}
     {% include "mainapp/includes/inc__menu.html" %}
 
-    {% block css %}
-        <link href="{% static 'styles/auth.css' %}" rel="stylesheet">
-    {% endblock %}
-
     <div class="auth">
         <form>
-            <cntr><img src="{% static 'img/def_avatar.png' %}" width="200" height="200"></cntr>
             <h1><p>Пользователь: {{ object.username }}</p></h1>
-            <hr>
-            {% for post in object.post_set.all %}
+            <h1><p>Имя: {{ object.first_name }}</p></h1>
+            <h1><p>Фамилия: {{ object.last_name }}</p></h1>            
+        </form>
+        {% for post in object.post_set.all %}
                 <cntr><a href="{% url 'mainapp:post' pk=post.pk %}"><p>{{ post }}</p></a></cntr>
                 <hr>
-        </form>
+            {% endfor %}
     </div>
-    {% endfor %}
+    
 {% endblock %}

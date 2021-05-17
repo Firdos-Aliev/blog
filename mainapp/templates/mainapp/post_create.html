@@ -4,10 +4,6 @@
 {% block content %}
     {% include "mainapp/includes/inc__menu.html" %}
 
-    {% block css %}
-        <link href="{% static 'styles/auth.css' %}" rel="stylesheet">
-    {% endblock %}
-
     <div class="auth">
         <form class="big" method="POST" enctype="multipart/form-data">
         {% csrf_token %}

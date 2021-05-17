@@ -4,10 +4,6 @@
 {% block content %}
     {% include "mainapp/includes/inc__menu.html" %}
 
-    {% block css %}
-        <link href="{% static 'styles/auth.css' %}" rel="stylesheet">
-    {% endblock %}
-
     <div class="auth">
     <p><h1>Personal account</h1></p>
         <form class="sidebar">
@@ -27,11 +23,11 @@
         <h1><p> Список постов:</p></h1>
         <form>
         {% for post in request.user.post_set.all %}
-
+            <hr>    
             <h3 class="left"><p>{{ post }}</p></h3>
+            <a href="{% url 'mainapp:post_update' pk=post.pk %}">Изменить</a>
+            <a href="{% url 'mainapp:post_delete' pk=post.pk %}">Удалить</a>
             <hr>
-                <a href="{% url 'mainapp:post_update' pk=post.pk %}">Изменить</a>
-                <a href="{% url 'mainapp:post_delete' pk=post.pk %}">Удалить</a>
         {% endfor %}
         </form>
     </div>

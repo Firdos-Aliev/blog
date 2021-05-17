@@ -9,16 +9,16 @@ body {
   background-color: #557A95;
 }
 
-ul {
+.menu ul {
     margin-left: 35%;
 }
 
-li {
+.menu li {
     float: left;
     color: #557A95;
 }
 
-a {
+.menu a {
     float: left;
     color: #938E94;
     text-align: center;
@@ -27,11 +27,11 @@ a {
     padding: 10px 19px;
 }
 
-a:hover {
+.menu a:hover {
     color: white;
 }
 
-li.right {
+.menu li.right {
     float: right;
     text-align: right;
 }
