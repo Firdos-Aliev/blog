@@ -20,8 +20,6 @@ class RegistrationForm(UserCreationForm):
     **Fields**
     :field: `username`
     :field: `email`
-    :field: `password`
-    :field: `password_confirm`
     """
     class Meta:
         model = get_user_model()
@@ -29,6 +27,15 @@ class RegistrationForm(UserCreationForm):
 
 
 class UserProfileForm(UserChangeForm):
+    """
+    Form to change profole
+
+    **Fields**
+    :field: `username`
+    :field: `email`
+    :field: `first_name`
+    :field: `last_name`
+    """
     class Meta:
         model = get_user_model()
         fields = ('username', 'email', 'first_name', 'last_name')

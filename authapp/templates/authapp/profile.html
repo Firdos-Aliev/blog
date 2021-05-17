@@ -6,15 +6,16 @@
 
     <div class="auth">
     <p><h1>Personal account</h1></p>
-        <form class="sidebar">
-            <hr>
-            <cntr><img src="{% static 'img/def_avatar.png' %}" width="200" height="200"></cntr>
-            <hr>
-        </form>
-
         <form class="content" method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form.username.label }}
+            {{ form.username }}
+            {{ form.email.label }}
+            {{ form.email }}
+            {{ form.first_name.label }}
+            {{ form.first_name }}
+            {{ form.last_name.label }}
+            {{ form.last_name }}
             <input type="submit" value="Change">
             <h2><a href="{% url 'authapp:users_profile' pk=request.user.pk %}">Просмотреть профиль</a></h2>
         </form>
