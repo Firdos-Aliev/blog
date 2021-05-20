@@ -11,9 +11,11 @@
             <h1><p>Фамилия: {{ object.last_name }}</p></h1>            
         </form>
         {% for post in object.post_set.all %}
+            {% if post.is_active %}
                 <cntr><a href="{% url 'mainapp:post' pk=post.pk %}"><p>{{ post }}</p></a></cntr>
                 <hr>
-            {% endfor %}
+            {% endif %}
+        {% endfor %}
     </div>
     
 {% endblock %}
