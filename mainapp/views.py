@@ -21,7 +21,7 @@ class PostList(ListView):
     model = Post
 
     def get_queryset(self):
-        return self.model.objects.filter(is_active=True).select_related()
+        return self.model.objects.filter(is_active=True).only('name','img','pk')
 
 
 class PostDetail(DetailView):
@@ -37,7 +37,7 @@ class PostDetail(DetailView):
     model = Post
 
     def get_queryset(self):
-        return self.model.objects.filter(pk=self.kwargs['pk'], is_active=True).select_related()
+        return self.model.objects.filter(is_active=True).only('name','img','pk','user','time','text','is_active')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)

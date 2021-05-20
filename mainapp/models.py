@@ -19,7 +19,7 @@ class Post(models.Model):
         return self.name
 
     def count_likes(self):
-        return len(self.likes_set.all())
+        return self.likes_set.all().count()
 
 class Comments(models.Model):
     """
