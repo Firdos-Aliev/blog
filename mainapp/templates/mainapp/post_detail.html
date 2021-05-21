@@ -8,14 +8,13 @@
         <div class="large">
             <hr>
             <h1><p>{{ object.name }}</p></h1>
-                {% if object.img %}
-                    <cntr><img src="media/{{ object.img }}" width="600px" alt="#"></p></cntr>
-                {% endif %}
+                <cntr><img src="/media/{{ object.img }}" width="600px" alt="#"></p></cntr>
             <hr>
             <h3>{{ object.text }}</h3>
             <hr>
             <sign>
-                <p><p>Автор: <a class="user" href="{% url 'authapp:users_profile' pk=object.user.pk %}">{{ object.user }}</a><p> at {{ object.time }}</p>
+                <p><p>Автор: <a class="user" href="{% url 'authapp:users_profile' pk=object.user_id %}">{{ object.user }}</a>
+                    <p> at {{ object.time }}</p>
             </sign>
             
 
