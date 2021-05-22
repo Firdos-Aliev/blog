@@ -30,6 +30,7 @@ class PostDetail(DetailView):
 
     **Context**
     :model: `mainapp.models.Post`
+    :form: `mainapp.forms.CommentForm`
 
     **Template**
     :template: `mainapp/post_detail.html`
@@ -39,16 +40,16 @@ class PostDetail(DetailView):
     def get_queryset(self):
         return self.model.objects.filter(is_active=True).only('name','img','pk','user','time','text','is_active')
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context["comment_form"] = CommentForm()
+        context["comments"] = kwargs['object'].comments_set.all().select_related("user")
         return context
 
     def post(self, request, pk):
-        if request.method == "POST":
-            form = CommentForm(data=request.POST)
-            if form.is_valid():
-                form.save()
+        form = CommentForm(data=request.POST)
+        if form.is_valid():
+            form.save()
         return HttpResponseRedirect(reverse("mainapp:post", kwargs={"pk":pk}))
 
 
@@ -68,10 +69,9 @@ class PostCreate(LoginRequiredMixin, CreateView):
     template_name = 'mainapp/post_create.html'
 
     def post(self, request):
-        if request.method == "POST":
-            form = PostForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.save()
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
         return HttpResponseRedirect(reverse("authapp:users_profile", kwargs={"pk":request.user.pk}))
 
 
